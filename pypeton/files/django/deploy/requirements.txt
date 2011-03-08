@@ -1,0 +1,36 @@
+#--- Django
+django == 1.2.5
+django-extensions
+django-debug-toolbar
+
+docutils
+pygments
+
+#--- Deploy with fabric
+-e git+git://github.com/bitprophet/fabric.git#egg=fabric
+-e git://github.com/ff0000/red-fab-deploy.git#egg=red-fab-deploy
+
+#--- Databases
+# psycopg2
+
+#--- Other Apps
+# -e git://github.com/ff0000/megafeed.git#egg=megafeed
+
+#--- SVN Version Tag
+# -e git://github.com/ff0000/django-svn-revision.git#egg=svnrevision
+
+#--- Admin
+# -e svn+http://django-grappelli.googlecode.com/svn/tags/releases/2.2#egg=grappelli
+# -e hg+http://bitbucket.org/izi/django-admin-tools@v0.4.0#egg=admin-tools
+# feedparser
+
+#--- Filebrowsing & Images
+# -e svn+http://10.0.1.5/dev_team/trunk/django-filebrowser-plus#egg=filebrowser
+
+#--- Behavior-driven development
+lettuce            # for Behavior Driven Development
+nose               # required by lettuce
+selenium           # required by lettuce
+adminlettuce       # to generate documentation from lettuce features
+random_instances   # to retrieve or generate random instances while testing
+radish             # additional configuration and steps for lettuce

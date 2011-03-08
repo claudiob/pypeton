@@ -1,0 +1,18 @@
+[
+    {
+        "pk": 1, 
+        "model": "things.thing", 
+        "fields": {
+            "name": "blue ball", 
+            "slug": "ball" 
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "things.thing", 
+        "fields": {
+            "name": "red airplane", 
+            "slug": "airplane" 
+        }
+    }
+]

@@ -1,0 +1,14 @@
+# Dependencies for Tornado
+#pycurl -- requires compiling and whatnot -- use python-pycurl system lib
+
+# Tornado
+http://github.com/downloads/facebook/tornado/tornado-1.1.tar.gz#egg=tornado
+
+# mongodb
+-e git://github.com/ff0000/mongor.git#egg=mongor
+
+# bongo
+-e git://github.com/ff0000/bongo.git#egg=bongo
+
+# pymongo
+pymongo

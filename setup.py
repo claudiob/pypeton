@@ -4,7 +4,7 @@ setup(
 	name         = 'pypeton',
 	packages     = ['pypeton',],
 	scripts      = ['pypeton/pypeton',],
-	version      = 'v0.0.1',
+	version      = 'v0.4.0',
 	author       = 'RED Interactive Agency',
 	author_email = 'geeks@ff0000.com',
 

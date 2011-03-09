@@ -51,6 +51,15 @@ class Environment:
 
  ########### Main Program ###########
 
+def success_message(message):
+	""" Simply print message """
+	print(green(message))
+
+def exit_message(message):
+	""" Simply print message and exit """
+	print(yellow(message))
+	sys.exit(1)
+
 def main():
 
 	parser = OptionParser('usage: %(green)s%%prog%(normal)s [options] project_name' % COLORS,
@@ -76,13 +85,13 @@ def main():
 
 	# Check if name was given
 	if not len(args):
-		return '%(yellow)sProject name required%(normal)s' % COLORS
+		exit_message('Project name required')
 	else: name = os.path.basename(args[0])
 
 	# Check if environment is appropriate
 	env = options.env.lower()
 	if env not in ENV_TYPES:
-		return yellow('Unknown env specified: %s' % env)
+		exit_message('Unknown env specified: %s' % env)
 	
 	# Use the given directory
 	if options.dir:
@@ -91,7 +100,7 @@ def main():
 		os.chdir(options.dir)
 	else:
 		if os.path.exists(name):
-			return yellow('[%s] already exists' % name)
+			exit_message('[%s] already exists' % name)
 		os.mkdir(name)
 		os.chdir(name)
 	
@@ -101,7 +110,7 @@ def main():
 	
 	# Deploy the project
 	Environment(name,env).deploy()
-	print(green('[%s] created successfully' % name))
+	success_message('[%s] created successfully' % name)
 	
 	# Try to install virtualenv
 	if options.virtualenv:
@@ -111,11 +120,11 @@ def main():
 					[(virtualenv.Logger.level_for_integer(2), sys.stdout)])
 			virtualenv.create_environment('trunk/env/')
 			os.symlink('env/bin/activate','trunk/activate')
-			print(green('Virtualenv for [%s] created successfully' % name))
+			success_message('Virtualenv for [%s] created successfully' % name)
 		except:
-			print(yellow('Virtualenv for [%s] not created' % name))
+			exit_message('Virtualenv for [%s] not created' % name)
 	
 	return
 
-if __name__ == '__main__': print main() or ''
+if __name__ == '__main__': main()
 

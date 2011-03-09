@@ -21,7 +21,7 @@ setup(
 	description  = """ Tool to start Django and Bongo projects """,
 
 	long_description = open('README.rst').read(),
-	requires     = [],
+	requires     = ['pycolors',],
 
 	classifiers  = (
 		'Development Status :: 3 - Alpha',

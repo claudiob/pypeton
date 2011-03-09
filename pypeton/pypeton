@@ -99,6 +99,10 @@ def main():
 	dirs = ['branches','tags',]
 	for d in dirs: os.makedirs(d)
 	
+	# Deploy the project
+	Environment(name,env).deploy()
+	print(green('[%s] created successfully' % name))
+	
 	# Try to install virtualenv
 	if options.virtualenv:
 		try:
@@ -106,13 +110,12 @@ def main():
 			virtualenv.logger = virtualenv.Logger(
 					[(virtualenv.Logger.level_for_integer(2), sys.stdout)])
 			virtualenv.create_environment('trunk/env/')
+			os.symlink('env/bin/activate','trunk/activate')
+			print(green('Virtualenv for [%s] created successfully' % name))
 		except:
-			return yellow('Sorry, virtualenv not found')
+			print(yellow('Virtualenv for [%s] not created' % name))
 	
-	# Deploy the project
-	Environment(name,env).deploy()
-	
-	return green('[%s] created successfully' % name)
+	return
 
 if __name__ == '__main__': print main() or ''
 

@@ -59,7 +59,7 @@ class Environment:
 		source = os.path.join(ROOT,'files/%s/' % self.env)
 		destination = os.path.join(os.getcwd(),'trunk/')
 		copytree(source, destination,
-				ignore=ignore_patterns('*.pyc','.svn*','*.swp'))
+				ignore=ignore_patterns('*.pyc','.svn*','*.swp','.gitignore'))
 
 		# For each file replace the keyword arguments
 		for root, dirnames, filenames in os.walk(destination):

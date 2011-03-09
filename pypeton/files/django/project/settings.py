@@ -70,7 +70,7 @@ INSTALLED_APPS = (
     #'debug_toolbar',
 )
 
-from socket import gethostname
+from socket import gethostname # Hostname based local settings 
 hostname = gethostname().split('.')[0]
 
 try:

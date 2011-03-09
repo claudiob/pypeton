@@ -141,7 +141,7 @@ def main():
 			import virtualenv
 			virtualenv.logger = virtualenv.Logger(
 					[(virtualenv.Logger.level_for_integer(2), sys.stdout)])
-			virtualenv.create_environment('trunk/project')
+			virtualenv.create_environment('trunk/env/')
 		except:
 			return yellow('Sorry, virtualenv not found')
 	

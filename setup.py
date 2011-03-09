@@ -3,9 +3,9 @@ from distutils.core import setup
 setup(
     name = 'pypeton',
     packages=['pypeton',],
-	version = '0.0.1',
-    author='FF0000 Geeks',
-    author_email='ff0000geeks@ff0000.com',
+	version = 'v0.0.1',
+    author='RED Interactive Agency',
+    author_email='geeks@ff0000.com',
 
     package_data={
         'pypeton': [

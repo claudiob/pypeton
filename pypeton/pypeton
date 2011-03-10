@@ -14,14 +14,15 @@ FILE_TYPES = ['conf','html','ini','py','txt','types',]
  ########### Environments ###########
 
 class Environment:
-	def __init__(self, name, env):
+	def __init__(self, name, env, vcs_root=''):
 		self.name = name
 		self.env = env
+		self.vcs_root = vcs_root
 
 	def deploy(self):
 		# Copy the entire directory tree over
 		source = os.path.join(ROOT,'files/%s/' % self.env)
-		destination = os.path.join(os.getcwd(),'trunk/')
+		destination = os.path.join(os.getcwd(),self.name,self.vcs_root)
 		copytree(source, destination,
 				ignore=ignore_patterns('*.pyc','.svn*','*.swp','.gitignore'))
 
@@ -66,6 +67,8 @@ def main():
 		version='0.4 %(green)sWhiskey %(yellow)sTango %(red)sRed%(normal)s' % COLORS)
 	parser.add_option('-v', '--virtualenv', action='store_true', default=False,
 		help='initialise virtual envirnment')
+	parser.add_option('-s', '--subversion', action='store_true', default=False,
+		help='create project in svn style with trunk/tags/branches')
 	parser.add_option('-d', '--dir', help='base project directory')
 
 	env_help = []
@@ -93,23 +96,27 @@ def main():
 	if env not in ENV_TYPES:
 		exit_message('Unknown env specified: %s' % env)
 	
+	vcs_root = options.subversion and 'trunk/' or ''
+
 	# Use the given directory
 	if options.dir:
-		if not os.path.exists(options.dir):
+		if not os.path.exists(options.dir) and not vcs_root:
 			os.makedirs(options.dir)
 		os.chdir(options.dir)
 	else:
 		if os.path.exists(name):
 			exit_message('[%s] already exists' % name)
-		os.mkdir(name)
-		os.chdir(name)
+		if vcs_root != '':
+			os.mkdir(name)
+			#os.chdir(name)
 	
 	# Make the basic file structure
-	dirs = ['branches','tags',]
-	for d in dirs: os.makedirs(d)
+	if vcs_root != '':
+		dirs = ['branches','tags',]
+		for d in dirs: os.makedirs(os.path.join(name,d))
 	
 	# Deploy the project
-	Environment(name,env).deploy()
+	Environment(name,env,vcs_root).deploy()
 	success_message('[%s] created successfully' % name)
 	
 	# Try to install virtualenv
@@ -118,8 +125,8 @@ def main():
 			import virtualenv
 			virtualenv.logger = virtualenv.Logger(
 					[(virtualenv.Logger.level_for_integer(2), sys.stdout)])
-			virtualenv.create_environment('trunk/env/')
-			os.symlink('env/bin/activate','trunk/activate')
+			virtualenv.create_environment(os.path.join(name,'trunk/env/'))
+			os.symlink('env/bin/activate',os.path.join(name,'trunk/activate'))
 			success_message('Virtualenv for [%s] created successfully' % name)
 		except:
 			exit_message('Virtualenv for [%s] not created' % name)

@@ -14,23 +14,21 @@ pygments
 # psycopg2
 
 #--- Other Apps
-# -e git://github.com/ff0000/megafeed.git#egg=megafeed
+# -e git://github.com/ff0000/cereal-box.git#egg=cereal-box
 
 #--- SVN Version Tag
 # -e git://github.com/ff0000/django-svn-revision.git#egg=svnrevision
 
 #--- Admin
 # -e svn+http://django-grappelli.googlecode.com/svn/tags/releases/2.2#egg=grappelli
+# -e svn+http://10.0.1.5/dev_team/trunk/django-filebrowser-plus#egg=filebrowser
 # -e hg+http://bitbucket.org/izi/django-admin-tools@v0.4.0#egg=admin-tools
 # feedparser
 
-#--- Filebrowsing & Images
-# -e svn+http://10.0.1.5/dev_team/trunk/django-filebrowser-plus#egg=filebrowser
-
 #--- Behavior-driven development
-lettuce            # for Behavior Driven Development
-nose               # required by lettuce
-selenium           # required by lettuce
-adminlettuce       # to generate documentation from lettuce features
-random_instances   # to retrieve or generate random instances while testing
-radish             # additional configuration and steps for lettuce
+# lettuce            # for Behavior Driven Development
+# nose               # required by lettuce
+# selenium           # required by lettuce
+# adminlettuce       # to generate documentation from lettuce features
+# random_instances   # to retrieve or generate random instances while testing
+# radish             # additional configuration and steps for lettuce

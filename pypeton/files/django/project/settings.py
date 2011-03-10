@@ -39,7 +39,7 @@ SECRET_KEY = '%(SECRET)s'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#    'django.template.loaders.eggs.Loader',
+    #'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,12 +62,12 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.messages',
     'django.contrib.sessions',
     #'django.contrib.sites',
-    'django.contrib.messages',
+    
+	#'debug_toolbar',
     'initial_data',      # to load fixtures
-    'things',
-    #'debug_toolbar',
 )
 
 from socket import gethostname # Hostname based local settings 

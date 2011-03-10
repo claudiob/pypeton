@@ -5,10 +5,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    # Application           
-    (r'^things/',         include('things.urls')),
-    # Home-page
-    (r'^$', 'things.views.index'),
+    
 )
 
 from django.conf import settings

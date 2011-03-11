@@ -6,6 +6,8 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
+	url(r'^$', 'django.views.generic.simple.direct_to_template', 
+		{'template':'homepage.html',}, name='home'), 
 )
 
 from django.conf import settings

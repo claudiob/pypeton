@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
 	name         = 'pypeton',
-	packages     = ['pypeton',],
+	#packages     = ['pypeton',],
 	scripts      = ['pypeton/pypeton',],
 	version      = 'v0.4.0',
 	author       = 'RED Interactive Agency',

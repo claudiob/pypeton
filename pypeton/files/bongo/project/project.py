@@ -21,7 +21,7 @@ try:
 	config.update((k,v) for k,v in  
 		__import__(hostname).__dict__.iteritems() if k[:2] != '__')
 	sys.path.remove(path)
-except: 
+except ImportError: 
 	print >> sys.stderr, '%(yellow)sLocal settings file: [%(blue)shosts/%%s.py%(yellow)s] not found, skipped.%(normal)s' %% hostname
 
 def main(): bongo.main('%(PROJECT_NAME)s', urls, **config)

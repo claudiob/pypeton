@@ -80,6 +80,6 @@ try:
     globals().update(__import__(hostname).__dict__)
     sys.path.remove(path)      
     __file__ = _f              
-except: 
+except ImportError: 
     print >> sys.stderr, '%(yellow)sLocal settings file: [%(blue)shosts/%%s.py%(yellow)s] not found, skipped.%(normal)s' %% hostname
 

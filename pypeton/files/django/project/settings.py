@@ -31,6 +31,7 @@ USE_L10N = True
 #INTERNAL_IPS = ('127.0.0.1',) # Used for debug_toolbar
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = MEDIA_ROOT
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 

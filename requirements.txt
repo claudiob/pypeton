@@ -1,2 +1,2 @@
--e git+git://github.com/ff0000/pycolors.git#egg=pycolors
+-e git+git://github.com/ff0000/pycolors2.git#egg=pycolors
 

@@ -16,5 +16,13 @@
             "email": "admin@example.com", 
             "date_joined": "2010-12-27 00:00:00"
         }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "example.com:8000", 
+            "name": "example.com:8000"
+        }
     } 
 ]

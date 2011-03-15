@@ -25,7 +25,7 @@ DATABASES = {
 }
 TIME_ZONE = 'America/Los_Angeles'
 LANGUAGE_CODE = 'en-us'
-#SITE_ID = 1
+SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 #INTERNAL_IPS = ('127.0.0.1',) # Used for debug_toolbar
@@ -65,7 +65,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.sessions',
-    #'django.contrib.sites',
+    'django.contrib.sites',
     
 	#'debug_toolbar',
     'initial_data',      # to load fixtures

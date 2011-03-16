@@ -1,5 +1,9 @@
+#--- pip
+pip == 0.8.3 # pip >= 0.8.2 is required for git branch to work correctly
+
 #--- Django
 django == 1.2.5
+httplib2            # for django's RequestContext
 django-extensions
 django-debug-toolbar
 

@@ -36,3 +36,4 @@ pygments
 # adminlettuce       # to generate documentation from lettuce features
 # random_instances   # to retrieve or generate random instances while testing
 # radish             # additional configuration and steps for lettuce
+

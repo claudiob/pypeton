@@ -1,0 +1,12 @@
+#!/bin/bash
+# Just an example script to check that some commands work
+rm -rf fooapp
+source bin/activate
+./pypeton/pypeton -v -s fooapp
+deactivate
+cd fooapp/trunk
+source activate
+cd project
+./req
+./syn development
+./sta Picture

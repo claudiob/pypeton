@@ -1,34 +1,19 @@
 import os.path
 import sys
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 
 # Include apps on the path
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 MANAGERS = ADMINS = (
     ('Red Interactive', 'geeks@ff0000.com'),
 )
 
-DATABASES = {
-    'default': {
-        # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': os.path.join(PROJECT_ROOT, '%(PROJECT_NAME)s.db'),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
 TIME_ZONE = 'America/Los_Angeles'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
-#INTERNAL_IPS = ('127.0.0.1',) # Used for debug_toolbar
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_ROOT = MEDIA_ROOT
@@ -66,21 +51,5 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.sites',
-    
-	#'debug_toolbar',
     'initial_data',      # to load fixtures
 )
-
-from socket import gethostname # Hostname based local settings 
-hostname = gethostname().split('.')[0]
-
-try:
-    _f = __file__              
-    path = os.path.join(PROJECT_ROOT, 'hosts')
-    sys.path.insert(0, path)   
-    globals().update(__import__(hostname).__dict__)
-    sys.path.remove(path)      
-    __file__ = _f              
-except ImportError, e: 
-	print >> sys.stderr, '%(yellow)sLocal settings file: [%(blue)shosts/%%s.py%(yellow)s] error:%(normal)s\n%%s' %% (hostname,e)
-

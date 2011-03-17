@@ -36,9 +36,9 @@ mkdir apps/$FOLDER/fixtures
 # features
 mkdir apps/$FOLDER/features
 touch apps/$FOLDER/features/__init__.py
-touch apps/$FOLDER/features/$CLASS.py
-touch apps/$FOLDER/features/$CLASS.feature
+touch apps/$FOLDER/features/$NAME.py
+touch apps/$FOLDER/features/$NAME.feature
 # add the tables
-python manage.py syncdb
+# python manage.py syncdb
 # Result
-echo -e "Application $CLASS created correctly.\nTo activate the application:\n\n    * add '$FOLDER' to INSTALLED_APPS in settings.py\n    * add (r'^$FOLDER/', include('$FOLDER.urls')) to urlpatterns in urls.py.\n"
+echo -e "Application $CLASS created correctly.\nTo activate the application:\n\n    * add '$FOLDER' to INSTALLED_APPS in settings/__init__.py\n    * add (r'^$FOLDER/', include('$FOLDER.urls')) to urlpatterns in urls.py\n    * run ./syn [environment]\n"

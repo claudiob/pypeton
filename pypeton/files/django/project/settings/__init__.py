@@ -6,7 +6,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
 MANAGERS = ADMINS = (
-    ('Red Interactive', 'geeks@ff0000.com'),
+    ('Your admin name', 'admin@example.com'),
 )
 
 TIME_ZONE = 'America/Los_Angeles'

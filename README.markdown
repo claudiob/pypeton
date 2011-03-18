@@ -1,14 +1,57 @@
 
+An application to bootstrap 
+
 Frequently we need to create a Django project from scratch and push it on a production machine. 
 **pypeton** helps reduce the number of manual steps to achieve this goal.
 
-## Creating the blank project
 
-The `pypeton` command creates a Django project that matches a set of coding standards and requirements:
+## Installation
+    
+    pip install -e git+git://github.com/ff0000/pypeton.git
 
-    ./pypeton -v -s fooapp
 
-This will create a *fooapp* folder with the default branches/tags/trunk folder for subversion. The trunk folder will contain a set of configuration folders and files and a Django project in the *project* folder.
+## Usage
+
+    pypeton [options] project_name
+    
+### Options
+
+      --version          show program's version number and exit
+      -h, --help         show this help message and exit
+      -v, --virtualenv   initialise virtual envirnment
+      -s, --subversion   create project in svn style with trunk/tags/branches
+      -d DIR, --dir=DIR  base project directory
+      -e ENV, --env=ENV  [bongo] or [django]
+      
+### Examples
+
+Most basic project
+
+    pypeton my_project
+    
+    
+Build out an svn folder structure, insert a django project into trunk, and 
+initialize a virtual environment all in one step.
+
+    pypeton -s -v my_project  
+    
+Specify a directory other than the present working directory
+
+    pypeton -d /path/to/folder  my_project
+    
+Create complete chaos ( a bongo project )
+
+    pypeton -e bongo  my_project
+    
+    
+## TODO: 
+
+Add description of project customization:
+
+* how to define requirements
+* what's in which folder
+
+
 
 ## Installing requirements
 

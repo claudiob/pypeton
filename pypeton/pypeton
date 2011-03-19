@@ -125,8 +125,9 @@ def main():
 			import virtualenv
 			virtualenv.logger = virtualenv.Logger(
 					[(virtualenv.Logger.level_for_integer(2), sys.stdout)])
-			virtualenv.create_environment(os.path.join(name,'trunk/env/'))
-			os.symlink('env/bin/activate',os.path.join(name,'trunk/activate'))
+			vdir = options.subversion and 'trunk/' or ''
+			virtualenv.create_environment(os.path.join(name,vdir,'env/'))
+			os.symlink('env/bin/activate',os.path.join(name,vdir,'activate'))
 			success_message('Virtualenv for [%s] created successfully' % name)
 		except:
 			exit_message('Virtualenv for [%s] not created' % name)

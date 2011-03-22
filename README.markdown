@@ -97,7 +97,7 @@ which extends the default "python manage.py startapp" command by delivering a co
 
 * add `'pictures',` to `INSTALLED_APPS` in settings/\_\_init\_\_.py, and
 * add `(r'^pictures/', include('pictures.urls'))` to `urlpatterns` in urls.py.
-* run `python manage.py syncdb` to add the model to the database
+* run `./syn development` to add the model to the database
 
 At this point, all these new views become available:
 
@@ -192,7 +192,7 @@ For local development, storing uploads (such as images) in the same folder as th
         django-cumulus       # to store uploads on CDN
 
 * run the command `./req` to install the new requirement
-* add the following lines to settings/\_\_init\_\_.py:
+* add the following lines to settings/staging.py:
 
         INSTALLED_APPS = INSTALLED_APPS + (
             'cumulus',

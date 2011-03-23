@@ -15,10 +15,13 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_ROOT = MEDIA_ROOT
-MEDIA_URL = '/media/'
-ADMIN_MEDIA_PREFIX = '/media/admin/'
+# MEDIA_URL is for stored files.
+# MEDIA_URL = '/uploads' 
+
+# STATIC_URL is for static assets (CSS, JS, ...)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 SECRET_KEY = '%(SECRET)s'
 
@@ -51,5 +54,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'initial_data',      # to load fixtures
 )

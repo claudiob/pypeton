@@ -14,5 +14,5 @@ class Command(BaseCommand):
         """
         # TODO: Raise an error if an argument is not passed
         system('pip install -r ../deploy/requirements.txt')
-        system('pip install -r ../deploy/requirements/%s.txt' % args[0])
+        system('pip install -r ../deploy/requirements/%%s.txt' %% args[0])
         logging.info("Require success")

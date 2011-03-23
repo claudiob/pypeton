@@ -60,9 +60,10 @@ The next step is to install the requirements for the project, with these command
     cd fooapp/trunk
     source activate
     cd project
-    python manage.py require
+    pip install -r ../deploy/requirements.txt 
+    python manage.py require development
 
-where `python manage.py require` is a provided shortcut for "pip install -r ../deploy/requirements.txt"
+where `python manage.py require development` is a provided shortcut for "pip install -r ../deploy/requirements/development.txt"
 
 ## Running the project in the browser
 

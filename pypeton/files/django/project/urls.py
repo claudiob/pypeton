@@ -1,17 +1,14 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
+from django.views.generic import TemplateView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    
-	url(r'^$', 'django.views.generic.simple.direct_to_template', 
-		{'template':'homepage.html',}, name='home'), 
+    # Homepage
+    (r'^$', TemplateView.as_view(template_name='homepage.html'))
 )
 
-from django.conf import settings
-if settings.DEBUG:
-    urlpatterns.insert(-2, url(r'^media/(?P<path>.*)',
-        'django.views.static.serve', 
-            {'document_root': settings.MEDIA_ROOT}))
+urlpatterns += staticfiles_urlpatterns()

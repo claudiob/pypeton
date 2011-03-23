@@ -1,4 +1,4 @@
-# Run python manage.py require to reload the python requirements
+# Run python manage.py require to load the requirements in a given environment
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -6,11 +6,13 @@ import logging
 from os import system        
 
 class Command(BaseCommand):
-    help = "Install the python requirements for the project."
+    help = "Install the python requirements for a given environment."
 
     def handle(self, *args, **options):
         """
-        Install the python requirements.
+        Install the python requirements for a given environment.
         """
+        # TODO: Raise an error if an argument is not passed
         system('pip install -r ../deploy/requirements.txt')
+        system('pip install -r ../deploy/requirements/%s.txt' % args[0])
         logging.info("Require success")

@@ -1,0 +1,4 @@
+#--- Load environmental requirements with: ./manage.py require staging 
+
+#--- Databases
+MySQL-python

@@ -16,6 +16,7 @@ pygments
 -e git+git://github.com/apache/libcloud.git@trunk#egg=libcloud
 
 #--- Databases
+# MySQL-python
 # psycopg2
 
 #--- Other Apps

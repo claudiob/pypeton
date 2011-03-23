@@ -1,17 +1,45 @@
 from settings import * 
 
-# Include all the settings specific to machines set up to run test suites
-# such as DATABASES, EMAIL_BACKEND, LETTUCE_APPS
-
+# Include all the settings specific to 'development' machines
+# such as DATABASES, TIME_ZONE
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+TIME_ZONE = 'America/Los_Angeles'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': 'test.db',
+        'NAME': os.path.join(PROJECT_ROOT, '%(PROJECT_NAME)s_test.db'),
     }
 }
 
-# Store e-mail message in memory for testig
+# Store e-mail message in memory for testing
 EMAIL_BACKEND = 'django.core.mail.backends.locmom.EmailBackend'
+
+# Install applications for integration testing
+INSTALLED_APPS += (
+    'lettuce.django',    # for Behavior Driven Development
+    'adminlettuce' ,     # to generate documentation from features
+    'radish',            # tests for admin
+)
+
+# List applications with lettuce features
+LETTUCE_APPS = ( 
+)
+
+
+# Load host-specific configuration file from hosts/[hostname].py
+from socket import gethostname # Hostname based local settings 
+hostname = gethostname().split('.')[0]
+try:
+    _f = __file__              
+    path = os.path.join(PROJECT_ROOT, 'hosts')
+    sys.path.insert(0, path)   
+    globals().update(__import__(hostname).__dict__)
+    sys.path.remove(path)      
+    __file__ = _f              
+except ImportError, e: 
+    print >> sys.stderr, '%(yellow)sLocal settings file: [%(blue)shosts/%%s.py%(yellow)s] error:%(normal)s\n%%s' %% (hostname,e)
+
 
 # Prevent interactive question about wanting a superuser created
 # since the admin/admin user is already created through the initial data

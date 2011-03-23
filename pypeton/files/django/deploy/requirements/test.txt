@@ -1,0 +1,10 @@
+#--- Load environmental requirements with: ./manage.py require test 
+
+#--- Behavior-driven development
+lettuce            # for Behavior Driven Development
+nose               # required by lettuce
+selenium           # required by lettuce
+adminlettuce       # to generate documentation from lettuce features
+random_instances   # to retrieve or generate random instances while testing
+radish             # additional configuration and steps for lettuce
+

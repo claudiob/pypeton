@@ -9,23 +9,25 @@ from fabric.contrib.project import *
 from fab_deploy import *
 
 def my_site():
-	""" Default Configuration """
-	env.conf = dict(
-		INSTANCE_NAME = 'project_name',
-		REPO = 'http://some.repo.com/project_name/',
-		SERVERS = {
-			'DEV'   : 'ubuntu@some.external.ip.address',
-			'LOAD1' : 'ubuntu@some.external.ip.address',
-			'WEB1'  : 'ubuntu@some.external.ip.address',
-			'WEB2'  : 'ubuntu@some.external.ip.address',
-			'DB1'   : 'ubuntu@some.external.ip.address',
-			'DB2'   : 'ubuntu@some.external.ip.address',
+    """ Default Configuration """
+    env.conf = dict(
+        INSTANCE_NAME = 'project_name',
+        REPO = 'http://some.repo.com/project_name/',
+        PROVIDER = '', # 'rackspace' or 'amazon'
+        CONF_FILE = 'fabric.conf',
+        SERVERS = {
+            'DEV'   : 'ubuntu@some.external.ip.address',
+            'LOAD1' : 'ubuntu@some.external.ip.address',
+            'WEB1'  : 'ubuntu@some.external.ip.address',
+            'WEB2'  : 'ubuntu@some.external.ip.address',
+            'DB1'   : 'ubuntu@some.external.ip.address',
+            'DB2'   : 'ubuntu@some.external.ip.address',
 
-			'CHRIS' : 'ubuntu@some.internal.ip.address',
-		}
-	)
+            'CHRIS' : 'ubuntu@some.internal.ip.address',
+        },
+    )
 
-	env.roledefs = {
+    env.roledefs = {
         'devservers'  : [
             env.conf['SERVERS']['DEV']       
             ],
@@ -43,7 +45,7 @@ def my_site():
         'developers'  : [
             env.conf['SERVERS']['CHRIS']       
             ],
-	}
+    }
 
 my_site()
 
@@ -70,10 +72,10 @@ def developers():
 
 #--- Servers
 def dev():
-	env.hosts = [env.conf['SERVERS']['DEV']]
-	update_env()
+    env.hosts = [env.conf['SERVERS']['DEV']]
+    update_env()
 
 def chris()
-	env.hosts = [env.conf['SERVERS']['CHRIS']]
-	update_env()
+    env.hosts = [env.conf['SERVERS']['CHRIS']]
+    update_env()
 

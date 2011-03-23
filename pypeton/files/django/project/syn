@@ -1,4 +1,0 @@
-#!/bin/bash
-python manage.py reset_db --settings=settings.$1
-python manage.py syncdb --settings=settings.$1
-python manage.py loaddata $1 --settings=settings.$1

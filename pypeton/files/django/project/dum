@@ -1,2 +1,0 @@
-#!/bin/bash
-python manage.py dumpdata $1 --indent=4 --settings=settings.$2 > apps/$1/fixtures/$2.json

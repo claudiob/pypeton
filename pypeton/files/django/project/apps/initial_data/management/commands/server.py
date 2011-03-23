@@ -13,9 +13,6 @@ class Command(BaseCommand):
         Call runserver with a given environment.
         """
         # TODO: Raise an error if an argument is not passed
-        host = "0.0.0.0:8000"
-        environment = "--settings=settings.%%s" %% args[0]
-        adminmedia = "--adminmedia=static/admin"
-        system('python manage.py runserver %%s %%s %%s' %% 
-            (host, environment, adminmedia))
+        environment = " --settings=settings.%%s" %% args[0]
+        system('python manage.py runserver 0.0.0.0:8000 %%s' %% environment)
         logging.info("Require success")

@@ -7,6 +7,8 @@ from os import system
 
 class Command(BaseCommand):
     help = "Install the python requirements for a given environment."
+    can_import_settings = False
+    requires_model_validation = False
 
     def handle(self, *args, **options):
         """

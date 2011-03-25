@@ -5,47 +5,22 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 # Include apps on the path
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
-MANAGERS = ADMINS = (
-    ('Your admin name', 'admin@example.com'),
-)
+# People who get code error notifications when DEBUG=False
+ADMINS = (('Your admin name', 'admin@example.com'),)
 
-TIME_ZONE = 'America/Los_Angeles'
-LANGUAGE_CODE = 'en-us'
-SITE_ID = 1
-USE_I18N = True
-USE_L10N = True
+# Never deploy a site into production with DEBUG turned on.
+DEBUG = False
 
-# MEDIA_URL is for stored files.
-# MEDIA_URL = '/uploads' 
+# Address to use for various automated correspondence from the site manager(s).
+DEFAULT_FROM_EMAIL = 'webmaster@example.com'
 
-# STATIC_URL is for static assets (CSS, JS, ...)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+# Maximum size (in bytes) before an upload gets streamed to the file system.
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
 
-SECRET_KEY = '%(SECRET)s'
+# List of locations of the fixture data files, in search order
+FIXTURE_DIRS = ()
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    #'django.template.loaders.eggs.Loader',
-)
-
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
-
-ROOT_URLCONF = 'urls'
-
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'templates'),
-)
-
+# A tuple of strings designating all the enabled applications
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
@@ -55,5 +30,80 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'initial_data',      # to load fixtures
+    'initial_data', # load django-admin commands, initial fixtures, ..
 )
+
+# The language code for this installation
+LANGUAGE_CODE = 'en-us'
+
+# Who should get broken-link notifications when SEND_BROKEN_LINK_EMAILS=True
+MANAGERS = ADMINS
+
+# Absolute path to the directory that holds stored files.
+MEDIA_ROOT = (os.path.join(PROJECT_ROOT, '..', 'uploads'),)
+
+# URL that handles the media served from MEDIA_ROOT (must end in a slash)
+MEDIA_URL = '/uploads/' 
+
+# A tuple of middleware classes to use
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+)
+
+# Number of digits grouped together on the integer part of a number
+NUMBER_GROUPING = 3
+
+# The full Python import path to the root URLconf
+ROOT_URLCONF = 'urls'
+
+# Seed for secret-key hashing algorithms
+SECRET_KEY = '%(SECRET)s'
+
+# The ID of the current site in the django_site database table
+SITE_ID = 1
+
+# Absolute path to the directory where collectstatic will collect static files 
+# for deployment.
+STATIC_ROOT = (os.path.join(PROJECT_ROOT, 'static'),)
+STATICFILES_DIRS = STATIC_ROOT # Note: is this deprecated?
+
+# URL to use when referring to static files located in STATIC_ROOT
+STATIC_URL = '/static/'
+
+# URL prefix for CSS, JavaScript and images used by the Django admin.
+# Use a trailing slash, and to have this be different from MEDIA_URL 
+# For integration with staticfiles, this should be  STATIC_URL + 'admin/'.
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+# Display a detailed report for any TemplateSyntaxError.
+TEMPLATE_DEBUG = DEBUG
+
+# List of locations of the template source files, in search order
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_ROOT, 'templates'),
+)
+
+# A tuple of template loader classes, specified as strings
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+# The time zone for this installation
+TIME_ZONE = 'America/Los_Angeles'
+
+# Output the "Etag" header. his saves bandwidth but slows down performance
+USE_ETAGS = False
+
+# Display numbers using a thousand separator
+USE_THOUSAND_SEPARATOR = True
+
+# Enable Django's internationalization system 
+USE_I18N = True
+
+# Display numbers and dates using the format of the current locale
+USE_L10N = True

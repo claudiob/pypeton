@@ -74,9 +74,10 @@ SECRET_KEY = '%(SECRET)s'
 SITE_ID = 1
 
 # Absolute path to the directory where collectstatic will collect static files 
-# for deployment.
-STATIC_ROOT = (os.path.join(PROJECT_ROOT, 'static'),)
-STATICFILES_DIRS = STATIC_ROOT # Note: is this deprecated?
+STATIC_ROOT = ''
+
+# Additional locations the staticfiles app will traverse
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
 
 # URL to use when referring to static files located in STATIC_ROOT
 STATIC_URL = '/static/'

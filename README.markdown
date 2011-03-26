@@ -41,7 +41,7 @@ Specify a directory other than the present working directory
     
 Create complete chaos ( a bongo project )
 
-    pypeton -e bongo  my_project
+    pypeton -e bongo my_project
     
     
 ## TODO: 
@@ -60,33 +60,32 @@ The next step is to install the requirements for the project, with these command
     cd fooapp/trunk
     source activate
     cd project
-    pip install -r ../deploy/requirements.txt 
-    python manage.py require development
+    ./manage.py require
 
-where `python manage.py require development` is a provided shortcut for "pip install -r ../deploy/requirements/development.txt"
+where `./manage.py require` is a provided shortcut for `pip install -r ../deploy/requirements.txt && pip install -r ../deploy/requirements/development.txt`.
 
 ## Running the project in the browser
 
 The project comes with an empty home-page which can be seen in a web browser by running:
 
-    python manage.py syncdb --settings=settings.development
-    python manage.py server development
+    ./manage.py syncdb
+    ./manage.py server
 
-and then opening [http://localhost:8000/](http://localhost:8000/) in a browser window. `python manage.py server` is a shortcut provided for the command `python manage.py runserver 0.0.0.0:8000 --settings=settings.$1` used frequently to start the local server.
+and then opening [http://localhost:8000/](http://localhost:8000/) in a browser window. `./manage.py server` is a shortcut provided for the command `./manage.py runserver 0.0.0.0:8000` used frequently to start the local server.
 
 ## Resetting the database and loading fixtures
  
 The project also comes with an application named *initial_data*, a model with a fixture to create in the development environment an *admin* user with password *admin* and a site called http://example.com:8000. These data can be loaded by running:
 
-    python manage.py sync development
+    ./manage.py sync
 
-where `python manage.py sync` is a shortcut to:
+where `./manage.py sync` is a shortcut to:
 
 * reset the database structure 
 * synchronize it again with the latest models
 * optionally reload the fixtures for the specified environment (in this case, users and sites for development)
 
-At this point, Django admin can be accessed by running `python manage.py server development` again, then logging into [http://example.com:8000/admin](http://example.com:8000/admin) with admin/admin (make sure to have "example.com" in the machine hosts file pointing to the localhost).
+At this point, Django admin can be accessed by running `./manage.py server` again, then logging into [http://example.com:8000/admin](http://example.com:8000/admin) with admin/admin (make sure to have "example.com" in the machine hosts file pointing to the localhost).
 
 ## Creating a new model and application
 
@@ -94,11 +93,11 @@ A new model (e.g., called *Picture*) can be created with the command:
 
     ./sta Picture
 
-which extends the default "python manage.py startapp" command by delivering a coherent file structure and providing two basic views for index and show. To include this model in the application:
+which extends the default "./manage.py startapp" command by delivering a coherent file structure and providing two basic views for index and show. To include this model in the application:
 
 * add `'pictures',` to `INSTALLED_APPS` in settings/\_\_init\_\_.py, and
 * add `(r'^pictures/', include('pictures.urls'))` to `urlpatterns` in urls.py.
-* run `python manage.py sync development` to add the model to the database
+* run `./manage.py sync` to add the model to the database
 
 At this point, all these new views become available:
 
@@ -118,7 +117,7 @@ The newly created model can be edited at will. For instance, the Picture model c
         pil                  # to use models.ImageField
         django-imagekit      # to deal with image size, thumbnails
 
-* run the command `python manage.py require` to install the new requirements
+* run the command `./manage.py require` to install the new requirements
 
 * edit apps/pictures/models.py to begin as:
 
@@ -165,7 +164,7 @@ The newly created model can be edited at will. For instance, the Picture model c
 
 * add `<img src="{{picture.image.url}}" />` to the content in templates/pictures/show.html
 
-At this point, run `python manage.py sync development` to adjust the database in order the include the Imagekit fields into the Picture table. Then the following views allow to:
+At this point, run `./manage.py sync` to adjust the database in order the include the Imagekit fields into the Picture table. Then the following views allow to:
 
 * http://example.com:8000/admin/pictures/picture/add/ (add a picture with an attached image)
 * http://example.com:8000/pictures/ (see the list of images with a thumbnail)
@@ -173,13 +172,13 @@ At this point, run `python manage.py sync development` to adjust the database in
 
 ## Creating fixtures
 
-Whenever the `python manage.py sync` command is run, all the data in the database is deleted. The method not to lose data during a synchronization is using fixtures.
+Whenever the `./manage.py sync` command is run, all the data in the database is deleted. The method not to lose data during a synchronization is using fixtures.
 
 For instance, after adding a Picture through the admin interface, this can be stored in a fixture running:
 
-    python manage.py dump pictures development
+    ./manage.py dump pictures
 
-where `python manage.py dump` is a shortcut for `python manage.py dumpdata` to output the data with the right indentation in the specified environment.
+where `./manage.py dump` is a shortcut for `./manage.py dumpdata` to output the data with the right indentation in the specified environment.
 
 At this point, running `.syn development` again will reset the database and reload the images from the fixtures, without losing any data in the operation.
 
@@ -192,7 +191,7 @@ For local development, storing uploads (such as images) in the same folder as th
 
         django-cumulus       # to store uploads on CDN
 
-* run the command `python manage.py require` to install the new requirement
+* run the command `./manage.py require` to install the new requirement
 * add the following lines to settings/staging.py:
 
         INSTALLED_APPS = INSTALLED_APPS + (
@@ -208,13 +207,13 @@ For local development, storing uploads (such as images) in the same folder as th
         CUMULUS_USE_SERVICENET   = False
         STATIC_URL               = ""
 
-At this point, run `python manage.py sync staging` to set up a database for the staging server (which, for now, is on the same development machine). Since it's a staging server, an admin/admin user will not be created automatically, but prompted, in order to use a valid password. 
+At this point, run `./manage.py sync --settings=settings.staging` to set up a database for the staging server (which, for now, is on the same development machine). Since it's a staging server, an admin/admin user will not be created automatically, but prompted, in order to use a valid password. 
 
-Then run `python manage.py server staging` to run the server with the staging settings. All the pictures will then be uploaded to the CDN and not to any local folder.
+Then run `./manage.py server --settings=settings.staging` to run the server with the staging settings. All the pictures will then be uploaded to the CDN and not to any local folder.
 
 It is also possible to batch upload all the pictures loaded so far in the development machine onto the CDN server that serves the staging environment by running:
 
-    python manage.py upload staging
+    ./manage.py syncstatic --settings=settings.staging
 
 
 

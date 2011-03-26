@@ -8,8 +8,15 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 # People who get code error notifications when DEBUG=False
 ADMINS = (('Your admin name', 'admin@example.com'),)
 
-# Never deploy a site into production with DEBUG turned on.
-DEBUG = False
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': os.path.join(PROJECT_ROOT, '%(PROJECT_NAME)s_development.db'),
+    }
+}
+
+# Never deploy a site into production with DEBUG turned on!
+DEBUG = True
 
 # Address to use for various automated correspondence from the site manager(s).
 DEFAULT_FROM_EMAIL = 'webmaster@example.com'

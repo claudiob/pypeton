@@ -1,9 +1,8 @@
 # Run python manage.py dump to dump a model's data into a fixture
 
-from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 import logging
-from os import system        
+from os import system, environ        
 
 class Command(BaseCommand):
     help = "Dump a model's data into a fixture."
@@ -11,13 +10,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """
         Dump a model's data into a fixture.
-        Example: python manage.py pictures development
+        Example: python manage.py pictures
         """
-        # TODO: Raise an error if an argument is not passed
-        model = args[0]
+        # assume project.settings.ENVIRONMENT else default to 'development'
+        env = environ['DJANGO_SETTINGS_MODULE'].split(".")[-1]
+        env = 'development' if env == 'settings' else env
+        # TODO: Raise error if the parameter is not passed
+        model = args[0] 
         indent = " --indent=4"
-        environment = " --settings=settings.%%s" %% args[1]
-        output = "apps/%%s/fixtures/%%s.json" %% (args[0], args[1])
+        settings = " --settings=settings.%%s" %% env
+        output = "apps/%%s/fixtures/%%s.json" %% (model, env)
         system('python manage.py dumpdata %%s %%s %%s > %%s' %% 
-            (model, indent, environment, output))
+            (model, indent, settings, output))
         logging.info("Dump success")

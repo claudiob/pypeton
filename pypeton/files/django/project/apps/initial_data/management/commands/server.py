@@ -1,9 +1,8 @@
 # Run python manage.py server to run the server in a given environment
 
-from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.core.management import call_command
 import logging
-from os import system        
 
 class Command(BaseCommand):
     help = "Call runserver with a given environment."
@@ -12,7 +11,5 @@ class Command(BaseCommand):
         """
         Call runserver with a given environment.
         """
-        # TODO: Raise an error if an argument is not passed
-        environment = " --settings=settings.%%s" %% args[0]
-        system('python manage.py runserver 0.0.0.0:8000 %%s' %% environment)
+        call_command('runserver', '0.0.0.0:8000')
         logging.info("Require success")

@@ -1,9 +1,9 @@
 # Run python manage.py sync to swipe, synchronize and pre-fill the database
 
-from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.core.management import call_command
 import logging
-from os import system        
+from os import environ
 
 class Command(BaseCommand):
     help = "Swipes, syncs and loads the database with fixtures."
@@ -12,9 +12,10 @@ class Command(BaseCommand):
         """
         Swipes, syncs and loads the database with fixtures.
         """
-        # TODO: Raise an error if an argument is not passed
-        environment = " --settings=settings.%%s" %% args[0]
-        system('python manage.py reset_db %%s' %% environment)
-        system('python manage.py syncdb %%s' %% environment)
-        system('python manage.py loaddata %%s %%s' %% (args[0], environment))
+        # assume project.settings.ENVIRONMENT else default to 'development'
+        env = environ['DJANGO_SETTINGS_MODULE'].split(".")[-1]
+        env = 'development' if env == 'settings' else env
+        call_command('reset_db')
+        call_command('syncdb')
+        call_command('loaddata', env)
         logging.info("Sync success")

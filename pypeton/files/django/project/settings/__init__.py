@@ -47,7 +47,7 @@ LANGUAGE_CODE = 'en-us'
 MANAGERS = ADMINS
 
 # Absolute path to the directory that holds stored files.
-MEDIA_ROOT = (os.path.join(PROJECT_ROOT, '..', 'uploads'),)
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, '..', 'uploads')
 
 # URL that handles the media served from MEDIA_ROOT (must end in a slash)
 MEDIA_URL = '/uploads/' 

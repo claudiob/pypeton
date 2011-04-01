@@ -17,10 +17,10 @@ if settings.DEBUG:
     hostname = gethostname().split('.')[0]
     try:
         _f = __file__              
-        path = os.path.join(settings.PROJECT_ROOT, 'hosts')
+        path = os.path.join(settings.PROJECT_ROOT, 'settings')
         sys.path.insert(0, path)   
         globals().update(__import__(hostname).__dict__)
         sys.path.remove(path)      
         __file__ = _f              
     except ImportError, e: 
-        print >> sys.stderr, '[33mLocal settings file: [[34mhosts/%%s.py[33m] error:[0m\n%%s' %% (hostname,e)
+        print >> sys.stderr, '[33mLocal settings file: [[34msettings/%%s.py[33m] error:[0m\n%%s' %% (hostname,e)

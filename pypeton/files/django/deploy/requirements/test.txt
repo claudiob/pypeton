@@ -1,5 +1,3 @@
-#--- Load environmental requirements with: ./manage.py require test 
-
 #--- Behavior-driven development
 lettuce            # for Behavior Driven Development
 nose               # required by lettuce

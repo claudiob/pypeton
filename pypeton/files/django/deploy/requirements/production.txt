@@ -1,4 +1,2 @@
-#--- Load environmental requirements with: ./manage.py require production 
-
 #--- Databases
 MySQL-python

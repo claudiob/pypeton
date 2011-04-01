@@ -1,9 +1,3 @@
-#--- Load environmental requirements with: ./manage.py require development 
-
-#--- Django
-django-debug-toolbar
-django-extensions
-
 #--- Deploy with fabric
 docutils
 pygments

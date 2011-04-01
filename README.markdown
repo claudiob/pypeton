@@ -126,7 +126,7 @@ The newly created model can be edited at will. For instance, the Picture model c
         
         class Picture(ImageModel):
             name = models.CharField(max_length=255)
-            image = models.ImageField(upload_to='uploads')
+            image = models.ImageField(upload_to='pictures')
             num_views = models.PositiveIntegerField(editable=False, default=0)
             #
             class IKOptions:

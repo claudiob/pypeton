@@ -10,6 +10,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """
         Dump a model's data into a fixture.
+        Uses --natural to avoid writing content_type_id which are subject
+        to changes while an application is under development.
         Example: python manage.py pictures
         """
         # assume project.settings.ENVIRONMENT else default to 'development'
@@ -17,9 +19,9 @@ class Command(BaseCommand):
         env = 'development' if env == 'settings' else env
         # TODO: Raise error if the parameter is not passed
         model = args[0] 
-        indent = " --indent=4"
+        options = " --indent=4 --natural"
         settings = " --settings=settings.%%s" %% env
         output = "apps/%%s/fixtures/%%s.json" %% (model, env)
         system('python manage.py dumpdata %%s %%s %%s > %%s' %% 
-            (model, indent, settings, output))
+            (model, options, settings, output))
         logging.info("Dump success")

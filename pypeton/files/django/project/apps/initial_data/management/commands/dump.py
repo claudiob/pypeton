@@ -20,8 +20,7 @@ class Command(BaseCommand):
         # TODO: Raise error if the parameter is not passed
         model = args[0] 
         options = " --indent=4 --natural"
-        settings = " --settings=settings.%%s" %% env
-        output = "apps/%%s/fixtures/%%s.json" %% (model, env)
-        system('python manage.py dumpdata %%s %%s %%s > %%s' %% 
-            (model, options, settings, output))
+        output = "apps/%s/fixtures/%s.json" % (model, env)
+        system('python manage.py dumpdata %s %s > %s' % 
+            (model, options, output))
         logging.info("Dump success")

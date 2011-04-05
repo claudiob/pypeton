@@ -12,6 +12,10 @@ django-debug-toolbar
 # django-adminfiles # for admin files
 # pil               # to use models.ImageField
 # django-imagekit   # to deal with image size, thumbnails
+# -e git+git://github.com/ff0000/django-imagekit.git#egg=imagekit
+# Use our fork of imagekit (forked from Yipit) since it's faster on CDN
+# See https://bitbucket.org/jdriscoll/django-imagekit/issue/28/
+
 # megafeed          # to deliver models through JSON
 
 #--- Deploy with fabric

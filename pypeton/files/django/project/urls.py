@@ -18,5 +18,5 @@ urlpatterns += staticfiles_urlpatterns()
 
 # Upload URLS
 if settings.DEBUG:
-    urlpatterns.insert(-2, url(r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:],
+    urlpatterns.insert(-2, url(r'^%%s(?P<path>.*)' %% settings.MEDIA_URL[1:],
         'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))
